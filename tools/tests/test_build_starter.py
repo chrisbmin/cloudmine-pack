@@ -28,7 +28,11 @@ class StarterTests(unittest.TestCase):
                 "instance.cfg", "mmc-pack.json", "cloudmine.png",
                 "minecraft/packwiz-installer-bootstrap.jar", "minecraft/servers.dat", "minecraft/options.txt"]))
             cfg = z.read("instance.cfg").decode()
-            self.assertIn(f'PreLaunchCommand="$INST_JAVA" -jar packwiz-installer-bootstrap.jar {MAIN_URL}', cfg)
+            # Prism's instance.cfg is Qt INI: a value starting with a quote is a quoted string with \" escapes.
+            raw = next(line for line in cfg.splitlines() if line.startswith("PreLaunchCommand=")).split("=", 1)[1]
+            self.assertTrue(raw.startswith('"') and raw.endswith('"'), raw)
+            self.assertEqual(raw[1:-1].replace('\\"', '"'),
+                             f'"$INST_JAVA" -jar packwiz-installer-bootstrap.jar {MAIN_URL}')
             self.assertIn("iconKey=cloudmine", cfg)
             self.assertIn("name=CloudMine\n", cfg)
             self.assertIn(b"play.cloudmine.thecoldnorth.net", z.read("minecraft/servers.dat"))

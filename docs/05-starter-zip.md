@@ -73,8 +73,12 @@ If the packwiz window never appears and Prism's log shows the bootstrap jar wasn
 `PreLaunchCommand` line in `starter/instance.cfg.template` to:
 
 ```text
-PreLaunchCommand="$INST_JAVA" -jar "$INST_MC_DIR/packwiz-installer-bootstrap.jar" {{PACK_URL}}
+PreLaunchCommand="\"$INST_JAVA\" -jar \"$INST_MC_DIR/packwiz-installer-bootstrap.jar\" {{PACK_URL}}"
 ```
+
+The outer quotes and the `\"` escapes matter: Prism's `instance.cfg` is Qt INI, where a value that starts
+with a quote is read as a quoted string. Without them, `"$INST_JAVA" -jar` turns into `$INST_JAVA-jar` and the
+command fails to start.
 
 Rebuild, re-import, re-test, then commit.
 
