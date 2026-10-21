@@ -117,9 +117,12 @@ class ShapeTests(unittest.TestCase):
         self.assertIs(e["changes"], changes)
 
     def test_site_mods_shape(self):
-        m = site_mods({"version": "2.0.0", "minecraft": "1.21.1", "neoforge": "21.1.215"}, "2026-10-21", [])
+        m = site_mods({"version": "2.0.0", "minecraft": "1.21.1", "neoforge": "21.1.215"}, "2026-10-21", [],
+                      {"arclight": "1.0.2-SNAPSHOT-494b2c8"})
         self.assertEqual(m, {"version": "2.0.0", "minecraft": "1.21.1", "loader": "NeoForge 21.1.215",
-                             "released": "2026-10-21", "entries": []})
+                             "released": "2026-10-21", "entries": [],
+                             "server": {"minecraft": "1.21.1", "neoforge": "21.1.215",
+                                        "arclight": "1.0.2-SNAPSHOT-494b2c8"}})
 
 
 class GuardTests(unittest.TestCase):
@@ -230,6 +233,7 @@ class MainTests(unittest.TestCase):
         self.assertEqual(self.call(["2.1.0", "--notes", "Hello"]), 0)
         mods = json.loads((self.pack / "site-data" / "mods.json").read_text(encoding="utf-8"))
         self.assertEqual(mods["version"], "2.1.0")
+        self.assertEqual(mods["server"], {"minecraft": "1.21.1", "neoforge": "21.1.215", "arclight": ""})
         self.assertEqual([e["id"] for e in mods["entries"]], ["sodium", "terralith"])
         log = json.loads((self.pack / "site-data" / "changelog.json").read_text(encoding="utf-8"))
         self.assertEqual(log[0]["tag"], "CloudMine 2.1.0")

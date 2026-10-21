@@ -1,0 +1,3 @@
+# The CloudMine server platform, published on the websites by tools/release.py (not part of the pack).
+# Minecraft and NeoForge come from pack.toml. Update arclight whenever the server's Arclight jar changes.
+arclight = "1.0.2-SNAPSHOT-494b2c8"

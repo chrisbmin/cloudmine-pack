@@ -1,6 +1,6 @@
 import unittest
 
-from tools.packlib import category, crlf_files, read_entries, read_versions, set_pack_version
+from tools.packlib import category, crlf_files, read_entries, read_server, read_versions, set_pack_version
 from tools.tests.helpers import make_pack, make_repo, pw_toml
 
 
@@ -61,6 +61,13 @@ class PackReaderTests(unittest.TestCase):
         pack = make_pack()
         set_pack_version(pack, "2.1.0")
         self.assertEqual(read_versions(pack), {"version": "2.1.0", "minecraft": "1.21.1", "neoforge": "21.1.215"})
+
+    def test_read_server_reads_arclight(self):
+        pack = make_pack({"server.toml": 'arclight = "1.0.2-SNAPSHOT-494b2c8"\n'})
+        self.assertEqual(read_server(pack), {"arclight": "1.0.2-SNAPSHOT-494b2c8"})
+
+    def test_read_server_missing_file_is_blank(self):
+        self.assertEqual(read_server(make_pack()), {"arclight": ""})
 
     def test_crlf_files_flags_crlf(self):
         repo = make_repo({"lf.txt": b"a\nb\n", "config/crlf.json5": b"a\r\nb\r\n"})

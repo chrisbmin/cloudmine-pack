@@ -75,6 +75,16 @@ def read_versions(pack_dir: Path) -> dict:
             "neoforge": versions.get("neoforge", "")}
 
 
+def read_server(pack_dir: Path) -> dict:
+    """The server platform from server.toml (not part of the pack): {"arclight"}; blank when the file is missing."""
+    path = Path(pack_dir) / "server.toml"
+    if not path.is_file():
+        return {"arclight": ""}
+    with path.open("rb") as f:
+        data = tomllib.load(f)
+    return {"arclight": str(data.get("arclight", ""))}
+
+
 def set_pack_version(pack_dir: Path, version: str) -> None:
     path = Path(pack_dir) / "pack.toml"
     text = path.read_text(encoding="utf-8")

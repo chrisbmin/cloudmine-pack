@@ -61,7 +61,11 @@ Only when the server moves to a new NeoForge (or a mod needs a newer one).
 3. Rebuild and upload the starter (steps 2 to 4 above).
 4. Your testing instance: right-click, **Edit**, **Version**, select **NeoForge**, **Change version**, pick
    the new one.
-5. Release (runbook 04) together with the server's NeoForge update, with a note for members:
+5. The server needs an Arclight build made for the new NeoForge (Arclight's 1.21.1 builds are listed at
+   `https://files.hypoglycemia.icu/v1/files/arclight/minecraft/1.21.1/loaders/neoforge/versions-snapshot`).
+   Put its build name in `server.toml` (`arclight = "..."`) and commit; the release publishes it on the
+   website and portal. The jar swap itself happens in the server window.
+6. Release (runbook 04) together with the server's NeoForge update, with a note for members:
 
    ```powershell
    python tools/release.py 2.2.0 --notes "NeoForge is now 21.1.230. In Prism: right-click CloudMine, Edit, Version, NeoForge, Change version, pick 21.1.230."

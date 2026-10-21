@@ -24,7 +24,8 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))  # so `python tools/release.py` can import the tools package
 
-from tools.packlib import category, parse_eol, read_entries, read_versions, set_pack_version  # noqa: E402
+from tools.packlib import (category, parse_eol, read_entries, read_server, read_versions,  # noqa: E402
+                           set_pack_version)
 
 USER_AGENT = "chrisbmin/cloudmine-pack (https://github.com/chrisbmin/cloudmine-pack)"
 VERSION_RE = re.compile(r"^\d+\.\d+\.\d+$")
@@ -103,9 +104,11 @@ def changelog_entry(version: str, changes: dict, minecraft: str, neoforge: str, 
             "changes": changes}
 
 
-def site_mods(versions_info: dict, released: str, snap: list[dict]) -> dict:
+def site_mods(versions_info: dict, released: str, snap: list[dict], server: dict) -> dict:
     return {"version": versions_info["version"], "minecraft": versions_info["minecraft"],
-            "loader": f"NeoForge {versions_info['neoforge']}", "released": released, "entries": snap}
+            "loader": f"NeoForge {versions_info['neoforge']}", "released": released, "entries": snap,
+            "server": {"minecraft": versions_info["minecraft"], "neoforge": versions_info["neoforge"],
+                       "arclight": server.get("arclight", "")}}
 
 
 def _vtuple(v: str) -> tuple:
@@ -259,7 +262,7 @@ def main(argv=None, pack_dir: Path = REPO, git=None, run=subprocess.run, lookup=
     run(["packwiz", "refresh"], cwd=pack_dir, check=True)
     versions_info = read_versions(pack_dir)
     stamp = now()
-    _write_json(mods_path, site_mods(versions_info, stamp.strftime("%Y-%m-%d"), cur))
+    _write_json(mods_path, site_mods(versions_info, stamp.strftime("%Y-%m-%d"), cur, read_server(pack_dir)))
     log = _read_json(log_path, [])
     log.insert(0, changelog_entry(args.version, changes, versions_info["minecraft"], versions_info["neoforge"],
                                   args.notes, stamp))
