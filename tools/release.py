@@ -112,6 +112,11 @@ def _vtuple(v: str) -> tuple:
     return tuple(int(x) for x in v.split("."))
 
 
+def _count(out: str) -> int:
+    out = out.strip()
+    return int(out) if out.isdigit() else 0
+
+
 def guard(repo: Path, version: str, git) -> None:
     if not VERSION_RE.match(version):
         raise ReleaseError(f"version must look like 2.1.0, got {version!r}")
@@ -120,6 +125,20 @@ def guard(repo: Path, version: str, git) -> None:
         raise ReleaseError(f"release from the testing branch (you're on {branch!r}): git checkout testing")
     if git(["status", "--porcelain"]).strip():
         raise ReleaseError("there are uncommitted changes: commit and push them to testing first")
+    try:
+        git(["fetch", "-q", "origin"])
+    except subprocess.CalledProcessError:
+        raise ReleaseError("couldn't reach GitHub (git fetch failed): check your internet connection and try again")
+    if _count(git(["rev-list", "--count", "testing..origin/testing"])):
+        raise ReleaseError("GitHub's testing branch has commits you don't have: run git pull first")
+    if _count(git(["rev-list", "--count", "main..origin/main"])):
+        raise ReleaseError("GitHub's main branch has commits your main doesn't: run git checkout main, git pull, "
+                           "git checkout testing, then try again")
+    try:
+        git(["merge-base", "--is-ancestor", "main", "testing"])
+    except subprocess.CalledProcessError:
+        raise ReleaseError("main has commits that testing doesn't, so it can't be fast-forwarded: run git merge main "
+                           "on testing and push, then try again")
     tag = f"v{version}"
     try:
         remote_tag = git(["ls-remote", "--tags", "origin", tag]).strip()
@@ -168,6 +187,20 @@ def _print_server_steps(steps: dict) -> None:
     print("  Leave the server stopped. Start it after this release finishes.\n")
 
 
+def _shown(cmd: list[str]) -> str:
+    return "git " + " ".join(f'"{a}"' if " " in a else a for a in cmd if a != "-q")
+
+
+def _print_recovery(cmds: list[list[str]], failed: int, server: bool) -> None:
+    print(f"\nRelease stopped: `{_shown(cmds[failed])}` failed. Nothing is lost.", file=sys.stderr)
+    print("Do not pick a new version and don't run release.py again for this one. Fix the cause (usually the "
+          "internet connection), then run these from the repo folder, in order:", file=sys.stderr)
+    for cmd in cmds[failed:]:
+        print(f"    {_shown(cmd)}", file=sys.stderr)
+    if server:
+        print("Keep the server stopped until the push succeeds, then start it in Crafty.", file=sys.stderr)
+
+
 def main(argv=None, pack_dir: Path = REPO, git=None, run=subprocess.run, lookup=modrinth_versions, ask=input,
          now=datetime.now) -> int:
     p = argparse.ArgumentParser(description="Release the testing branch to every member.")
@@ -190,7 +223,6 @@ def main(argv=None, pack_dir: Path = REPO, git=None, run=subprocess.run, lookup=
         print(f"Not released: {e}", file=sys.stderr)
         return 1
 
-    run(["packwiz", "refresh"], cwd=pack_dir, check=True)
     mods_path = pack_dir / "site-data" / "mods.json"
     log_path = pack_dir / "site-data" / "changelog.json"
     prev = _read_json(mods_path, {}).get("entries", [])
@@ -216,6 +248,7 @@ def main(argv=None, pack_dir: Path = REPO, git=None, run=subprocess.run, lookup=
             print("Not released: the server step wasn't confirmed. Nothing changed.", file=sys.stderr)
             return 1
 
+    run(["packwiz", "refresh"], cwd=pack_dir, check=True)  # not on a dry run, which must change nothing
     set_pack_version(pack_dir, args.version)
     run(["packwiz", "refresh"], cwd=pack_dir, check=True)
     versions_info = read_versions(pack_dir)
@@ -227,13 +260,15 @@ def main(argv=None, pack_dir: Path = REPO, git=None, run=subprocess.run, lookup=
     _write_json(log_path, log)
 
     tag = f"v{args.version}"
-    git(["add", "-A"])
-    git(["commit", "-q", "-m", f"Release {args.version}"])
-    git(["checkout", "-q", "main"])
-    git(["merge", "-q", "--ff-only", "testing"])
-    git(["tag", tag])
-    git(["push", "origin", "main", "testing", tag])
-    git(["checkout", "-q", "testing"])
+    publish = [["add", "-A"], ["commit", "-q", "-m", f"Release {args.version}"], ["checkout", "-q", "main"],
+               ["merge", "-q", "--ff-only", "testing"], ["tag", tag], ["push", "origin", "main", "testing", tag],
+               ["checkout", "-q", "testing"]]
+    for i, cmd in enumerate(publish):
+        try:
+            git(cmd)
+        except subprocess.CalledProcessError:
+            _print_recovery(publish, i, bool(steps["add"] or steps["remove"]))
+            return 1
     print(f"Released CloudMine {args.version}. Members get it the next time they press Play.")
     if steps["add"] or steps["remove"]:
         print("Now start the server in Crafty and join to confirm.")

@@ -26,6 +26,18 @@ class MarkTests(unittest.TestCase):
         with self.pw.open("rb") as f:
             tomllib.load(f)
 
+    def test_set_option_emoji_description_parses(self):
+        set_option(self.pw, False, "Zoom \U0001f50d like a spyglass")
+        self.assertEqual(one_entry(self.pack).description, "Zoom \U0001f50d like a spyglass")
+
+    def test_set_option_control_character_refused_and_file_unchanged(self):
+        before = self.pw.read_bytes()
+        with self.assertRaises(ValueError):
+            set_option(self.pw, False, "bad\x7fdescription")
+        with self.assertRaises(ValueError):
+            set_option(self.pw, False, "two\nlines")
+        self.assertEqual(self.pw.read_bytes(), before)
+
     def test_set_option_twice_keeps_one_option_table(self):
         set_option(self.pw, True, "one")
         set_option(self.pw, False, "two")

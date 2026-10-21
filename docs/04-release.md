@@ -71,6 +71,23 @@ Use `--notes` when members need to know something, for example a NeoForge change
 Crafty, **Start**. Watch the console (or `logs/latest.log`) until it says `Done`. If it stops with an error
 about a mod, see Undo.
 
+## If the release stops partway
+
+If step 3 ends with **"Release stopped: ... failed. Nothing is lost."**, a git step failed (almost always the
+internet connection during the push). The tool prints the exact commands still to run.
+
+1. **Don't** pick a new version and **don't** run `release.py` again for this version: the release commit and
+   tag already exist on your PC, so it would refuse.
+2. Keep the server stopped if you stopped it.
+3. Fix the cause (check your connection), then copy and run the printed commands in order, for example:
+
+   ```powershell
+   git push origin main testing v2.1.0
+   git checkout testing
+   ```
+
+4. Continue with step 4 (start the server) and Verify.
+
 ## Verify
 
 1. Launch **CloudMine-Testing**: it downloads nothing new (testing and main are now the same) and joins the

@@ -17,14 +17,18 @@ def snap(id, filename, side="client", name=None, category="core", default=None, 
 
 
 class FakeGit:
-    def __init__(self, branch="testing", status="", local_tags="", remote_tags="", eol="i/lf    w/lf    attr/-text\tpack.toml\n"):
+    def __init__(self, branch="testing", status="", local_tags="", remote_tags="", eol="i/lf    w/lf    attr/-text\tpack.toml\n",
+                 replies=None, fail=()):
         self.replies = {("rev-parse", "--abbrev-ref", "HEAD"): branch, ("status", "--porcelain"): status,
-                        ("ls-files", "--eol"): eol}
+                        ("ls-files", "--eol"): eol, **(replies or {})}
         self.local_tags, self.remote_tags = local_tags, remote_tags
+        self.fail = fail  # first words of git commands that fail, e.g. ("push",)
         self.calls = []
 
     def __call__(self, args):
         self.calls.append(list(args))
+        if args[0] in self.fail:
+            raise subprocess.CalledProcessError(1, ["git", *args])
         if args[:2] == ["tag", "-l"]:
             return self.local_tags
         if args[:2] == ["ls-remote", "--tags"]:
@@ -156,6 +160,24 @@ class GuardTests(unittest.TestCase):
         with self.assertRaisesRegex(ReleaseError, "GitHub"):
             guard(self.pack, "2.1.0", git)
 
+    def test_guard_fetch_failure_is_release_error(self):
+        with self.assertRaisesRegex(ReleaseError, "GitHub"):
+            guard(self.pack, "2.1.0", FakeGit(fail=("fetch",)))
+
+    def test_guard_testing_behind_origin(self):
+        git = FakeGit(replies={("rev-list", "--count", "testing..origin/testing"): "2"})
+        with self.assertRaisesRegex(ReleaseError, "git pull"):
+            guard(self.pack, "2.1.0", git)
+
+    def test_guard_main_behind_origin(self):
+        git = FakeGit(replies={("rev-list", "--count", "main..origin/main"): "1"})
+        with self.assertRaisesRegex(ReleaseError, "main"):
+            guard(self.pack, "2.1.0", git)
+
+    def test_guard_main_not_ancestor_of_testing(self):
+        with self.assertRaisesRegex(ReleaseError, "main"):
+            guard(self.pack, "2.1.0", FakeGit(fail=("merge-base",)))
+
     def test_guard_greater_version_ok(self):
         guard(self.pack, "2.0.10", FakeGit())
 
@@ -163,7 +185,7 @@ class GuardTests(unittest.TestCase):
         repo = make_repo({"pack.toml": (self.pack / "pack.toml").read_bytes(), "config/x.json5": b"a\r\nb\r\n"})
 
         def real_git(args):
-            if args[0] == "ls-remote":
+            if args[0] in ("ls-remote", "fetch", "rev-list", "merge-base"):
                 return ""  # throwaway repo has no origin
             return subprocess.run(["git", "-C", str(repo), *args], check=True, capture_output=True, text=True).stdout
 
@@ -246,6 +268,22 @@ class MainTests(unittest.TestCase):
         finally:
             sys.stdout = saved
         self.assertEqual(code, 0)
+
+    def test_main_push_failure_prints_recovery_commands(self):
+        import contextlib
+        import io
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(out):
+            code = self.call(["2.1.0"], git=FakeGit(fail=("push",)))
+        self.assertEqual(code, 1)
+        text = out.getvalue()
+        self.assertIn("git push origin main testing v2.1.0", text)
+        self.assertIn("git checkout testing", text)
+        self.assertIn("Do not pick a new version", text)
+
+    def test_main_dry_run_does_not_refresh(self):
+        self.call(["2.1.0", "--dry-run"])
+        self.assertEqual(self.runs, [])
 
     def test_main_guard_failure_exits_1(self):
         self.assertEqual(self.call(["2.1.0"], git=FakeGit(branch="main")), 1)

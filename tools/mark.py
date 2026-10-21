@@ -11,6 +11,7 @@ import json
 import re
 import subprocess
 import sys
+import tomllib
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -44,9 +45,14 @@ def _write(pw: Path, text: str) -> None:
 
 
 def set_option(pw: Path, default: bool, description: str) -> None:
+    if any(ord(c) < 0x20 or ord(c) == 0x7F for c in description):
+        raise ValueError("the description must be one line of plain text (no tabs, line breaks or control characters)")
     text = _without_option(pw.read_text(encoding="utf-8"))
-    # json.dumps gives a valid TOML basic string (escaped quotes, backslashes and control characters).
-    block = f"\n[option]\noptional = true\ndefault = {str(default).lower()}\ndescription = {json.dumps(description)}\n"
+    # json.dumps escapes quotes and backslashes the way TOML does; ensure_ascii=False keeps emoji as-is (TOML has
+    # no surrogate-pair escapes).
+    block = (f"\n[option]\noptional = true\ndefault = {str(default).lower()}\n"
+             f"description = {json.dumps(description, ensure_ascii=False)}\n")
+    tomllib.loads(text + block)  # never write a file packwiz couldn't read
     _write(pw, text + block)
 
 
@@ -87,7 +93,11 @@ def main(argv=None, pack_dir: Path = REPO, run=subprocess.run) -> int:
         return 2
 
     if args.optional:
-        set_option(pw, args.default == "on", args.description)
+        try:
+            set_option(pw, args.default == "on", args.description)
+        except ValueError as e:
+            print(f"not changed: {e}", file=sys.stderr)
+            return 2
     elif args.required:
         set_required(pw)
     else:
