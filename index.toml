@@ -141,6 +141,16 @@ hash = "2ffd0c6ed2e981835168a60cb3418482223ee02d22dd35d0bb541774fa89f81c"
 metafile = true
 
 [[files]]
+file = "mods/just-zoom.pw.toml"
+hash = "d38a46fb74a41de6b9a65381e0455624414a833448bf5f085f5ae9e4fae2f085"
+metafile = true
+
+[[files]]
+file = "mods/konkrete.pw.toml"
+hash = "5707b722541648df013644f3b4d50083c77965d536f219df9fac5026f6103777"
+metafile = true
+
+[[files]]
 file = "mods/lithostitched.pw.toml"
 hash = "c0611d8448bc043f372a008a435e14aa238ba8fca52fd1d79634424576ea9e12"
 metafile = true
@@ -238,11 +248,6 @@ metafile = true
 [[files]]
 file = "mods/tiny-item-animations.pw.toml"
 hash = "4e44f23801c8e644fd7946eaa1572e8c817d86ffa6ff335518b487310042fa4c"
-metafile = true
-
-[[files]]
-file = "mods/wi-zoom.pw.toml"
-hash = "e1056a6d4f0f486f909dfee635c87f2156d8935eb84ab822fd247c62f8f977ed"
 metafile = true
 
 [[files]]
