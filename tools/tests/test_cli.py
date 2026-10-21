@@ -16,6 +16,9 @@ class ScriptsRunDirectlyTests(unittest.TestCase):
     def test_mark_help(self):
         self.check("mark.py")
 
+    def test_migrate_help(self):
+        self.check("migrate.py")
+
 
 if __name__ == "__main__":
     unittest.main()
