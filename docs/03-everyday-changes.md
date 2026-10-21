@@ -85,6 +85,10 @@ If packwiz says the author has disabled third-party downloads or asks you to dow
 **don't ship it**: remove it again (`packwiz remove <id>`) and pick an alternative. Members would be stuck
 with a manual download.
 
+packwiz doesn't always warn. After adding anything from CurseForge, push and launch **CloudMine-Testing**:
+if a **"Failed file downloads"** window lists it, the author blocks third-party downloads. Remove it and use
+a Modrinth alternative (this is why WI Zoom was swapped for Just Zoom).
+
 ## Update one entry
 
 ```powershell
