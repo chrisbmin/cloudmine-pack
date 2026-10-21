@@ -23,3 +23,11 @@ We support the pack. If something breaks, turn off your extras first.
 - `docs/`: runbooks, starting with `docs/README.md`.
 
 Tests: `python -m unittest discover -s tools/tests -t .`
+
+## Starter
+
+`python tools/build_starter.py` writes `dist/CloudMine-Starter.zip` and `dist/CloudMine-Testing.zip`.
+`starter/packwiz-installer-bootstrap.jar` is
+[packwiz-installer-bootstrap](https://github.com/packwiz/packwiz-installer-bootstrap) v0.0.3 (MIT, license in
+`starter/LICENSE-packwiz-installer-bootstrap.txt`), sha256
+`a8fbb24dc604278e97f4688e82d3d91a318b98efc08d5dbfcbcbcab6443d116c`.

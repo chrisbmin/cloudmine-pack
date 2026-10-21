@@ -19,6 +19,9 @@ class ScriptsRunDirectlyTests(unittest.TestCase):
     def test_migrate_help(self):
         self.check("migrate.py")
 
+    def test_build_starter_help(self):
+        self.check("build_starter.py")
+
 
 if __name__ == "__main__":
     unittest.main()

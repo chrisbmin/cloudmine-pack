@@ -1,0 +1,3 @@
+skipMultiplayerWarning:true
+onboardAccessibility:false
+tutorialStep:none
