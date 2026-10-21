@@ -176,6 +176,9 @@ def main(argv=None, pack_dir: Path = REPO, git=None, run=subprocess.run, lookup=
     p.add_argument("--dry-run", action="store_true", help="show what would change; change nothing")
     p.add_argument("--server-done", action="store_true", help="server already stopped and updated; don't ask")
     args = p.parse_args(argv)
+    for stream in (sys.stdout, sys.stderr):  # mod names can hold emoji the Windows console can't print
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(errors="replace")
     pack_dir = Path(pack_dir)
     if git is None:
         def git(a):

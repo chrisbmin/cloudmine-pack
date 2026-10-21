@@ -234,6 +234,19 @@ class MainTests(unittest.TestCase):
         self.assertEqual([e["tag"] for e in log], ["CloudMine 2.2.0", "CloudMine 2.1.0"])
         self.assertEqual([u["to"]["id"] for u in log[0]["changes"]["updated"]], ["sodium"])
 
+    def test_main_survives_console_without_emoji(self):
+        import io
+        import sys
+        (self.pack / "mods" / "jade.pw.toml").write_text(
+            pw_toml("Jade 🔍", "jade.jar", side="client", mod_id="PJ", version="vJ"), encoding="utf-8")
+        saved = sys.stdout
+        sys.stdout = io.TextIOWrapper(io.BytesIO(), encoding="cp1252")
+        try:
+            code = self.call(["2.1.0", "--dry-run"])
+        finally:
+            sys.stdout = saved
+        self.assertEqual(code, 0)
+
     def test_main_guard_failure_exits_1(self):
         self.assertEqual(self.call(["2.1.0"], git=FakeGit(branch="main")), 1)
 
