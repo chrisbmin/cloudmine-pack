@@ -248,7 +248,13 @@ def main(argv=None, pack_dir: Path = REPO, git=None, run=subprocess.run, lookup=
             print("Not released: the server step wasn't confirmed. Nothing changed.", file=sys.stderr)
             return 1
 
-    run(["packwiz", "refresh"], cwd=pack_dir, check=True)  # not on a dry run, which must change nothing
+    try:
+        run(["packwiz", "refresh"], cwd=pack_dir, check=True)  # not on a dry run, which must change nothing
+    except FileNotFoundError:
+        print("Not released: this terminal can't find packwiz. Nothing changed. Open a new terminal, or run\n"
+              '    $env:Path += ";$env:USERPROFILE\\go\\bin"\n'
+              "then run the same release command again.", file=sys.stderr)
+        return 1
     set_pack_version(pack_dir, args.version)
     run(["packwiz", "refresh"], cwd=pack_dir, check=True)
     versions_info = read_versions(pack_dir)

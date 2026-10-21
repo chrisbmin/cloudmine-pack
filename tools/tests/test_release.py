@@ -285,6 +285,24 @@ class MainTests(unittest.TestCase):
         self.call(["2.1.0", "--dry-run"])
         self.assertEqual(self.runs, [])
 
+    def test_main_missing_packwiz_stops_before_anything(self):
+        import contextlib
+        import io
+        out = io.StringIO()
+
+        def no_packwiz(cmd, **kwargs):
+            raise FileNotFoundError(2, "The system cannot find the file specified")
+
+        self.git = FakeGit()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(out):
+            code = main(["2.1.0", "--server-done"], pack_dir=self.pack, git=self.git, run=no_packwiz,
+                        lookup=lambda ids: {}, ask=lambda p: "stopped", now=lambda: NOW)
+        self.assertEqual(code, 1)
+        self.assertIn("packwiz", out.getvalue())
+        self.assertIn("go\\bin", out.getvalue())
+        self.assertEqual(writes(self.git.calls), [])
+        self.assertIn('version = "2.0.0"', (self.pack / "pack.toml").read_text(encoding="utf-8"))
+
     def test_main_guard_failure_exits_1(self):
         self.assertEqual(self.call(["2.1.0"], git=FakeGit(branch="main")), 1)
 
