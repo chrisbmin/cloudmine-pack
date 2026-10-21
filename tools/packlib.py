@@ -82,6 +82,11 @@ def set_pack_version(pack_dir: Path, version: str) -> None:
 def crlf_files(repo: Path) -> list[str]:
     out = subprocess.run(["git", "-C", str(repo), "ls-files", "--eol"], check=True,
                          capture_output=True, text=True).stdout
+    return parse_eol(out)
+
+
+def parse_eol(out: str) -> list[str]:
+    """Paths from `git ls-files --eol` output whose index or working copy has CRLF line endings."""
     bad = []
     for line in out.splitlines():
         # "<index eol> <worktree eol> attr/<attrs>\t<path>"

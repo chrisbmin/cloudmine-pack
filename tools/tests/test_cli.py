@@ -22,6 +22,9 @@ class ScriptsRunDirectlyTests(unittest.TestCase):
     def test_build_starter_help(self):
         self.check("build_starter.py")
 
+    def test_release_help(self):
+        self.check("release.py")
+
 
 if __name__ == "__main__":
     unittest.main()
