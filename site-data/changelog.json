@@ -1,0 +1,332 @@
+[
+  {
+    "ts": 1792616967,
+    "date": "2026-10-21",
+    "tag": "CloudMine 2.0.0",
+    "track": "cloudmine",
+    "minecraft": "1.21.1",
+    "loader": "NeoForge 21.1.264",
+    "notes": "First packwiz release. Replaces the Base, Mid and Max packs. Install the new starter from the downloads page.",
+    "changes": {
+      "added": [
+        {
+          "id": "3d-crops",
+          "name": "3D crops Revamped",
+          "version": "3"
+        },
+        {
+          "id": "entity-model-features",
+          "name": "[EMF] Entity Model Features",
+          "version": "3.3.12-neoforge-1.21"
+        },
+        {
+          "id": "entitytexturefeatures",
+          "name": "[ETF] Entity Texture Features",
+          "version": "7.2.6-neoforge-1.21"
+        },
+        {
+          "id": "ambientsounds",
+          "name": "AmbientSounds",
+          "version": "6.3.11"
+        },
+        {
+          "id": "appleskin",
+          "name": "AppleSkin",
+          "version": "3.0.9+mc1.21"
+        },
+        {
+          "id": "architectury-api",
+          "name": "Architectury API",
+          "version": "13.0.11+neoforge"
+        },
+        {
+          "id": "armor-poser",
+          "name": "Armor Poser",
+          "version": "6.2.4"
+        },
+        {
+          "id": "badpackets",
+          "name": "bad packets",
+          "version": "neo-0.8.2"
+        },
+        {
+          "id": "badoptimizations",
+          "name": "BadOptimizations",
+          "version": "2.4.1"
+        },
+        {
+          "id": "better-clouds",
+          "name": "Better Clouds",
+          "version": "1.13.11+1.21.1-neoforge-release"
+        },
+        {
+          "id": "better-lanterns",
+          "name": "Better Lanterns",
+          "version": "1.2+1.21"
+        },
+        {
+          "id": "betterf3",
+          "name": "BetterF3",
+          "version": "11.0.3"
+        },
+        {
+          "id": "catalogue",
+          "name": "Catalogue",
+          "version": "catalogue-neoforge-1.21.1-1.11.2.jar"
+        },
+        {
+          "id": "cloth-config",
+          "name": "Cloth Config API",
+          "version": "15.0.140+neoforge"
+        },
+        {
+          "id": "colourful-containers-gui",
+          "name": "Colourful containers GUI",
+          "version": "26.2"
+        },
+        {
+          "id": "complementary-unbound",
+          "name": "Complementary Shaders - Unbound",
+          "version": "r5.9.3"
+        },
+        {
+          "id": "configured",
+          "name": "Configured",
+          "version": "configured-neoforge-1.21.1-2.6.3.jar"
+        },
+        {
+          "id": "continuity",
+          "name": "Continuity",
+          "version": "3.0.0+1.21.neoforge"
+        },
+        {
+          "id": "creativecore",
+          "name": "CreativeCore",
+          "version": "2.13.51"
+        },
+        {
+          "id": "door-tweaks",
+          "name": "Door Tweaks",
+          "version": "3.5"
+        },
+        {
+          "id": "enchant-icons-countxd",
+          "name": "Enchant Icons",
+          "version": "v1.3"
+        },
+        {
+          "id": "entityculling",
+          "name": "Entity Culling",
+          "version": "1.11.3"
+        },
+        {
+          "id": "fallingleavesforge",
+          "name": "Falling Leaves (NeoForge/Forge)",
+          "version": "1.21.1-2.6.0"
+        },
+        {
+          "id": "ferrite-core",
+          "name": "FerriteCore",
+          "version": "7.0.3-neoforge"
+        },
+        {
+          "id": "forgified-fabric-api",
+          "name": "Forgified Fabric API",
+          "version": "0.116.15+2.3.6+1.21.1"
+        },
+        {
+          "id": "framework",
+          "name": "Framework",
+          "version": "framework-neoforge-1.21.1-0.13.11.jar"
+        },
+        {
+          "id": "iris",
+          "name": "Iris Shaders",
+          "version": "1.8.14-beta.1+1.21.1-neoforge"
+        },
+        {
+          "id": "jade",
+          "name": "Jade 🔍",
+          "version": "15.10.6+neoforge"
+        },
+        {
+          "id": "jei",
+          "name": "Just Enough Items (JEI)",
+          "version": "19.69.0.457"
+        },
+        {
+          "id": "just-zoom",
+          "name": "Just Zoom",
+          "version": "3.0.1-1.21.1-neoforge"
+        },
+        {
+          "id": "konkrete",
+          "name": "Konkrete",
+          "version": "1.9.9-1.21-neoforge"
+        },
+        {
+          "id": "lithostitched",
+          "name": "Lithostitched",
+          "version": "1.8.1-neoforge-21.1"
+        },
+        {
+          "id": "mafglib",
+          "name": "MaFgLib",
+          "version": "0.4.3+mc1.21.1"
+        },
+        {
+          "id": "maplink",
+          "name": "Map Link  (formerly Remote Player Waypoints for Xaero's Map)",
+          "version": "4.6.0"
+        },
+        {
+          "id": "mezzconfig",
+          "name": "MezzConfig",
+          "version": "0.6.8"
+        },
+        {
+          "id": "modernfix",
+          "name": "ModernFix",
+          "version": "5.27.26+mc1.21.1"
+        },
+        {
+          "id": "better-leaves",
+          "name": "Motschen's Better Leaves",
+          "version": "9.6"
+        },
+        {
+          "id": "mouse-tweaks",
+          "name": "Mouse Tweaks",
+          "version": "1.21-2.26.1-neoforge"
+        },
+        {
+          "id": "moving-elevators",
+          "name": "Moving Elevators",
+          "version": "1.4.12-neoforge-mc1.21"
+        },
+        {
+          "id": "refurbished-furniture",
+          "name": "MrCrayfish's Furniture Mod: Refurbished",
+          "version": "refurbished_furniture-neoforge-1.21.1-1.0.22.jar"
+        },
+        {
+          "id": "mru",
+          "name": "MRU",
+          "version": "1.0.41+1.21.1-neoforge"
+        },
+        {
+          "id": "fancyfast-bushy-leaves",
+          "name": "Optimized Bushy Leaves",
+          "version": "v4.1"
+        },
+        {
+          "id": "os-colorful-grasses",
+          "name": "Os' Colorful Grasses",
+          "version": "Tall-26.3"
+        },
+        {
+          "id": "pick-up-notifier",
+          "name": "Pick Up Notifier",
+          "version": "v21.1.1-1.21.1-NeoForge"
+        },
+        {
+          "id": "puzzles-lib",
+          "name": "Puzzles Lib",
+          "version": "21.1.65"
+        },
+        {
+          "id": "qraftys-capitalized-font",
+          "name": "qrafty's Capitalized Font",
+          "version": "3.1"
+        },
+        {
+          "id": "rays-3d-ladders",
+          "name": "RAY's 3D Ladders",
+          "version": "2.4"
+        },
+        {
+          "id": "rays-3d-rails",
+          "name": "RAY's 3D Rails",
+          "version": "3.6"
+        },
+        {
+          "id": "connector",
+          "name": "Sinytra Connector",
+          "version": "2.0.0-beta.17+1.21.1"
+        },
+        {
+          "id": "sodium",
+          "name": "Sodium",
+          "version": "mc1.21.1-0.8.13-neoforge"
+        },
+        {
+          "id": "sodium-extra",
+          "name": "Sodium Extra",
+          "version": "mc1.21.1-0.9.4+neoforge"
+        },
+        {
+          "id": "sound-physics-remastered",
+          "name": "Sound Physics Remastered",
+          "version": "neoforge-1.21.1-1.5.1"
+        },
+        {
+          "id": "sound",
+          "name": "Sounds",
+          "version": "2.4.22+lts+1.21.1-neoforge"
+        },
+        {
+          "id": "super-duper-vanilla",
+          "name": "Super Duper Vanilla",
+          "version": "1.3.8"
+        },
+        {
+          "id": "supermartijn642s-config-lib",
+          "name": "SuperMartijn642's Config Lib",
+          "version": "1.1.8-neoforge-mc1.21"
+        },
+        {
+          "id": "supermartijn642s-core-lib",
+          "name": "SuperMartijn642's Core Lib",
+          "version": "1.1.25-neoforge-mc1.21"
+        },
+        {
+          "id": "tectonic",
+          "name": "Tectonic",
+          "version": "3.0.28-neoforge-21.1"
+        },
+        {
+          "id": "terralith",
+          "name": "Terralith",
+          "version": "2.5.8"
+        },
+        {
+          "id": "tiny-item-animations",
+          "name": "Tiny Item Animations",
+          "version": "1.2.1"
+        },
+        {
+          "id": "3d-plants",
+          "name": "Vervada's enhanced plants",
+          "version": "1.0.6"
+        },
+        {
+          "id": "xaeros-minimap",
+          "name": "Xaero's Minimap",
+          "version": "neoforge-1.21.1-26.6.0"
+        },
+        {
+          "id": "xaeros-world-map",
+          "name": "Xaero's World Map",
+          "version": "neoforge-1.21.1-1.47.0"
+        },
+        {
+          "id": "yacl",
+          "name": "YetAnotherConfigLib (YACL)",
+          "version": "3.8.2+1.21.1-neoforge"
+        }
+      ],
+      "removed": [],
+      "updated": []
+    }
+  }
+]
