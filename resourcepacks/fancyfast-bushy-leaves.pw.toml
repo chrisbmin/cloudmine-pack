@@ -1,0 +1,13 @@
+name = "Optimized Bushy Leaves"
+filename = "Optimized Bushy Leaves.zip"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/pQHHONnS/versions/EGZkpR5R/Optimized%20Bushy%20Leaves.zip"
+hash-format = "sha512"
+hash = "92b118c26ceecd92a7e2d6e3fe55ed343b0a3a278834ba2c8d0f403e00394ca649e6163cd30b11b98380e27ba02bed7be844f136b5a57888bbb73c0c8c32a7f9"
+
+[update]
+[update.modrinth]
+mod-id = "pQHHONnS"
+version = "EGZkpR5R"

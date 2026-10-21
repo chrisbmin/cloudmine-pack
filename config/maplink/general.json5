@@ -1,0 +1,69 @@
+{
+	"enabled": true,
+	"serverEntries": [
+		{
+			"maptype": "Bluemap",
+			"ip": "play.cloudmine.thecoldnorth.net",
+			"link": "map.cloudmine.thecoldnorth.net",
+			"markerVisibilityMode": "All",
+			"markerLayers": [
+				"BlueBridgeGP-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978",
+				"BlueBridgeWG-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978",
+				"BlueBridgeWB-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978"
+			],
+			"individualMarkerMode": "BlackList",
+			"markers": [],
+			"areaMarkerVisibilityMode": "All",
+			"areaMarkerLayers": [
+				"BlueBridgeGP-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978",
+				"BlueBridgeWG-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978",
+				"BlueBridgeWB-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978"
+			],
+			"individualAreaMarkerMode": "BlackList",
+			"areaMarkers": [],
+			"iconMarkerVisibilityMode": "All",
+			"iconMarkerLayers": [
+				"BlueBridgeGP-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978",
+				"BlueBridgeWG-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978",
+				"BlueBridgeWB-2a3e9f25-9cdb-43d4-a4d4-42c67be0a978"
+			],
+			"individualIconMode": "BlackList",
+			"icons": []
+		}
+	],
+	"maxUpdateDelay": 2000,
+	"defaultY": 64,
+	"minimapWaypointsRenderBelow": "WHEN_PLAYER_LIST_SHOWN",
+	"enablePlayerWaypoints": true,
+	"showPlayerWaypointsAsTrackedPlayers": true,
+	"interpolationTime": 100,
+	"enablePlayerIconWaypoints": true,
+	"useMcHeadsPlayerNameIcons": false,
+	"playerWaypointColor": "Black",
+	"showAfkInTabList": true,
+	"timeUntilAfk": 120,
+	"showAfkTimeInTabList": true,
+	"hideAfkMinutes": false,
+	"AfkColor": 16733440,
+	"unknownAfkStateColor": 6316128,
+	"enableMarkerWaypoints": true,
+	"enableMarkerIcons": true,
+	"showDefaultMarkerIcons": true,
+	"markerWaypointColor": "Gray",
+	"enableAreaMarkerOverlay": true,
+	"areaFillAlphaMul": 100,
+	"areaFillAlphaMin": 0,
+	"areaFillAlphaMax": 42,
+	"areaLineAlphaMul": 100,
+	"areaLineAlphaMin": 0,
+	"areaLineAlphaMax": 100,
+	"blocksPerChunkThreshold": 128,
+	"maxChunkArea": 500000,
+	"ignoredServers": [],
+	"ignoreMarkerMessage": false,
+	"hideAllChatErrors": false,
+	"debugMode": false,
+	"chatLogInDebugMode": true,
+	"ignoreCertificatesUseAtYourOwnRisk": false,
+	"configVersionDoNotEdit": 2
+}
