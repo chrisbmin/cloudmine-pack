@@ -34,6 +34,13 @@ class PackReaderTests(unittest.TestCase):
         self.assertIsNone(e.version_id)
         self.assertEqual(category(e), "core")
 
+    def test_read_entries_curseforge_ids(self):
+        pack = make_pack({"mods/framework.pw.toml": pw_toml("Framework", "framework.jar", side="both", cf=(549225, 7012345))})
+        [e] = read_entries(pack)
+        self.assertEqual((e.curseforge_project, e.curseforge_file), (549225, 7012345))
+        self.assertEqual(e.download, "")
+        self.assertIsNone(e.modrinth_id)
+
     def test_resourcepack_and_shader_categories(self):
         pack = make_pack({
             "resourcepacks/leaves.pw.toml": pw_toml("Leaves", "leaves.zip"),

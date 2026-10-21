@@ -19,6 +19,8 @@ class Entry:
     hash: str
     modrinth_id: str | None
     version_id: str | None
+    curseforge_project: int | None
+    curseforge_file: int | None
     optional: bool
     default: bool
     description: str
@@ -29,6 +31,7 @@ def _entry(path: Path, folder: str) -> Entry:
         data = tomllib.load(f)
     download = data.get("download", {})
     modrinth = data.get("update", {}).get("modrinth", {})
+    curseforge = data.get("update", {}).get("curseforge", {})
     option = data.get("option", {})
     return Entry(
         id=path.name.removesuffix(".pw.toml"),
@@ -40,6 +43,8 @@ def _entry(path: Path, folder: str) -> Entry:
         hash=download.get("hash", ""),
         modrinth_id=modrinth.get("mod-id"),
         version_id=modrinth.get("version"),
+        curseforge_project=curseforge.get("project-id"),
+        curseforge_file=curseforge.get("file-id"),
         optional=bool(option.get("optional", False)),
         default=bool(option.get("default", False)),
         description=option.get("description", ""),

@@ -92,6 +92,14 @@ class SnapshotTests(unittest.TestCase):
                                                       "description", "url", "filename", "download"]))
 
 
+    def test_snapshot_curseforge_links(self):
+        pack = make_pack({"mods/framework.pw.toml": pw_toml("Framework", "framework.jar", side="both", cf=(549225, 7012345))})
+        [s] = snapshot(read_entries(pack), {})
+        self.assertEqual(s["url"], "https://www.curseforge.com/projects/549225")
+        self.assertEqual(s["download"], "https://www.curseforge.com/api/v1/mods/549225/files/7012345/download")
+        self.assertEqual(s["version"], "framework.jar")
+
+
 class ShapeTests(unittest.TestCase):
     def test_changelog_entry_shape(self):
         changes = {"added": [], "removed": [], "updated": []}

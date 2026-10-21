@@ -19,14 +19,19 @@ neoforge = "21.1.215"
 '''
 
 
-def pw_toml(name, filename, side=None, mod_id=None, version=None, url="https://cdn.example/x.jar", option=None):
+def pw_toml(name, filename, side=None, mod_id=None, version=None, url="https://cdn.example/x.jar", option=None, cf=None):
     """Text of a minimal .pw.toml. option is a dict like {"optional": True, "default": False, "description": "x"}."""
     lines = [f'name = "{name}"', f'filename = "{filename}"']
     if side is not None:
         lines.append(f'side = "{side}"')
-    lines += ["", "[download]", f'url = "{url}"', 'hash-format = "sha1"', 'hash = "abc"']
+    if cf is not None:  # CurseForge entries carry no url, only ids: cf = (project_id, file_id)
+        lines += ["", "[download]", 'hash-format = "sha1"', 'hash = "abc"', 'mode = "metadata:curseforge"']
+    else:
+        lines += ["", "[download]", f'url = "{url}"', 'hash-format = "sha1"', 'hash = "abc"']
     if mod_id is not None:
         lines += ["", "[update]", "[update.modrinth]", f'mod-id = "{mod_id}"', f'version = "{version}"']
+    if cf is not None:
+        lines += ["", "[update]", "[update.curseforge]", f"file-id = {cf[1]}", f"project-id = {cf[0]}"]
     if option is not None:
         lines += ["", "[option]", f'optional = {str(option["optional"]).lower()}']
         if "default" in option:

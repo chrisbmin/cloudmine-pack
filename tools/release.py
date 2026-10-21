@@ -50,14 +50,22 @@ def snapshot(entries, versions: dict[str, str]) -> list[dict]:
     out = []
     for e in entries:
         cat = category(e)
+        url, download = "", e.download
+        if e.modrinth_id:
+            url = f"https://modrinth.com/project/{e.modrinth_id}"
+        elif e.curseforge_project:
+            # CurseForge entries have no download url in the pack; members' installers resolve it from the ids.
+            url = f"https://www.curseforge.com/projects/{e.curseforge_project}"
+            if not download and e.curseforge_file:
+                download = (f"https://www.curseforge.com/api/v1/mods/{e.curseforge_project}"
+                            f"/files/{e.curseforge_file}/download")
         out.append({
             "id": e.id, "name": e.name or e.id,
             "version": versions.get(e.version_id or "", "") or e.filename,
             "category": cat, "side": e.side,
             "default": e.default if cat == "optional" else None,
             "description": e.description,
-            "url": f"https://modrinth.com/project/{e.modrinth_id}" if e.modrinth_id else "",
-            "filename": e.filename, "download": e.download,
+            "url": url, "filename": e.filename, "download": download,
         })
     return out
 
