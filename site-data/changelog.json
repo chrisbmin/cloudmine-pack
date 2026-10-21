@@ -1,5 +1,19 @@
 [
   {
+    "ts": 1792617700,
+    "date": "2026-10-21",
+    "tag": "CloudMine 2.0.1",
+    "track": "cloudmine",
+    "minecraft": "1.21.1",
+    "loader": "NeoForge 21.1.264",
+    "notes": "Adds the server versions (Minecraft, NeoForge, Arclight) to the website and portal. No mod changes.",
+    "changes": {
+      "added": [],
+      "removed": [],
+      "updated": []
+    }
+  },
+  {
     "ts": 1792616967,
     "date": "2026-10-21",
     "tag": "CloudMine 2.0.0",

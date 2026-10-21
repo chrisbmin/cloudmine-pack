@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.0.1",
   "minecraft": "1.21.1",
   "loader": "NeoForge 21.1.264",
   "released": "2026-10-21",
@@ -760,5 +760,10 @@
       "filename": "yet_another_config_lib_v3-3.8.2+1.21.1-neoforge.jar",
       "download": "https://cdn.modrinth.com/data/1eAoo2KR/versions/7TVdVtxF/yet_another_config_lib_v3-3.8.2%2B1.21.1-neoforge.jar"
     }
-  ]
+  ],
+  "server": {
+    "minecraft": "1.21.1",
+    "neoforge": "21.1.264",
+    "arclight": "1.0.2-SNAPSHOT-494b2c8"
+  }
 }
