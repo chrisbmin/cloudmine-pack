@@ -301,11 +301,6 @@ hash = "bb2b6a511327bc8782c7c12c6be81c11fa3fcb7fa4fd10d4093a5170862e1ad5"
 metafile = true
 
 [[files]]
-file = "resourcepacks/fancyfast-bushy-leaves.pw.toml"
-hash = "26c32283fb88cf408d251df3322afd6218ad1dac1310fc073661117280696219"
-metafile = true
-
-[[files]]
 file = "resourcepacks/os-colorful-grasses.pw.toml"
 hash = "c4c5801928c11881e71967a9f005ab8f4bdcf7a82a94973a6b96332bdba96110"
 metafile = true
