@@ -1,5 +1,30 @@
 [
   {
+    "ts": 1792695467,
+    "date": "2026-10-22",
+    "tag": "CloudMine 2.0.2",
+    "track": "cloudmine",
+    "minecraft": "1.21.1",
+    "loader": "NeoForge 21.1.264",
+    "notes": "Removed Optimized Bushy Leaves (broken textures on 1.21.1) and the Super Duper Vanilla shader. Better Leaves and Complementary Unbound remain.",
+    "changes": {
+      "added": [],
+      "removed": [
+        {
+          "id": "fancyfast-bushy-leaves",
+          "name": "Optimized Bushy Leaves",
+          "version": "v4.1"
+        },
+        {
+          "id": "super-duper-vanilla",
+          "name": "Super Duper Vanilla",
+          "version": "1.3.8"
+        }
+      ],
+      "updated": []
+    }
+  },
+  {
     "ts": 1792617700,
     "date": "2026-10-21",
     "tag": "CloudMine 2.0.1",

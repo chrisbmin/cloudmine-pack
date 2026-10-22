@@ -1,8 +1,8 @@
 {
-  "version": "2.0.1",
+  "version": "2.0.2",
   "minecraft": "1.21.1",
   "loader": "NeoForge 21.1.264",
-  "released": "2026-10-21",
+  "released": "2026-10-22",
   "entries": [
     {
       "id": "3d-crops",
@@ -315,18 +315,6 @@
       "url": "https://modrinth.com/project/2JAUNCL4",
       "filename": "fallingleaves-1.21.1-2.6.0.jar",
       "download": "https://cdn.modrinth.com/data/2JAUNCL4/versions/ZTfOTZtM/fallingleaves-1.21.1-2.6.0.jar"
-    },
-    {
-      "id": "fancyfast-bushy-leaves",
-      "name": "Optimized Bushy Leaves",
-      "version": "v4.1",
-      "category": "resourcepack",
-      "side": "client",
-      "default": null,
-      "description": "",
-      "url": "https://modrinth.com/project/pQHHONnS",
-      "filename": "Optimized Bushy Leaves.zip",
-      "download": "https://cdn.modrinth.com/data/pQHHONnS/versions/EGZkpR5R/Optimized%20Bushy%20Leaves.zip"
     },
     {
       "id": "ferrite-core",
@@ -651,18 +639,6 @@
       "url": "https://modrinth.com/project/qyVF9oeo",
       "filename": "sound-physics-remastered-neoforge-1.21.1-1.5.1.jar",
       "download": "https://cdn.modrinth.com/data/qyVF9oeo/versions/Dd2tmpsk/sound-physics-remastered-neoforge-1.21.1-1.5.1.jar"
-    },
-    {
-      "id": "super-duper-vanilla",
-      "name": "Super Duper Vanilla",
-      "version": "1.3.8",
-      "category": "shader",
-      "side": "client",
-      "default": null,
-      "description": "",
-      "url": "https://modrinth.com/project/LMIZZNxZ",
-      "filename": "superDuperVanilla.zip",
-      "download": "https://cdn.modrinth.com/data/LMIZZNxZ/versions/KB0sOLSc/superDuperVanilla.zip"
     },
     {
       "id": "supermartijn642s-config-lib",
