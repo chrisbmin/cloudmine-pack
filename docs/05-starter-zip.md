@@ -30,10 +30,10 @@ these do:
    python tools/build_starter.py
    ```
 
-3. Test: import `dist\CloudMine-Starter.zip` in Prism as a new instance, launch it, join the server. Delete
+3. Test: import `dist\CloudMine-ModPack.zip` in Prism as a new instance, launch it, join the server. Delete
    that instance afterwards.
-4. Upload `dist\CloudMine-Starter.zip` with FileZilla to MDD
-   `public_html/thecoldnorth-cloudmine/dl/CloudMine-Starter.zip` (replace the old one).
+4. Upload `dist\CloudMine-ModPack.zip` with FileZilla to MDD
+   `public_html/thecoldnorth-cloudmine/dl/CloudMine-ModPack.zip` (replace the old one).
 5. Commit and push on `testing`:
 
    ```powershell

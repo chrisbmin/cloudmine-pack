@@ -26,7 +26,7 @@ python tools/build_starter.py
 Expected:
 
 ```text
-wrote M:\Code\github\cloudmine-pack\dist\CloudMine-Starter.zip
+wrote M:\Code\github\cloudmine-pack\dist\CloudMine-ModPack.zip
 wrote M:\Code\github\cloudmine-pack\dist\CloudMine-Testing.zip
 ```
 

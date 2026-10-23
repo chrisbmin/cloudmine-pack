@@ -2,7 +2,7 @@
 
     python tools/build_starter.py
 
-Writes dist/CloudMine-Starter.zip (members, follows main) and dist/CloudMine-Testing.zip (owner, follows
+Writes dist/CloudMine-ModPack.zip (members, follows main) and dist/CloudMine-Testing.zip (owner, follows
 testing). Each holds the instance settings, the CloudMine icon, the packwiz bootstrap that syncs the pack on
 every launch, a server list with CloudMine in it, and a few default options.
 """
@@ -14,7 +14,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 RAW = "https://raw.githubusercontent.com/chrisbmin/cloudmine-pack"
 SERVERS = [("CloudMine", "play.cloudmine.thecoldnorth.net")]
-STARTERS = [("CloudMine-Starter.zip", "CloudMine", f"{RAW}/main/pack.toml"),
+STARTERS = [("CloudMine-ModPack.zip", "CloudMine", f"{RAW}/main/pack.toml"),
             ("CloudMine-Testing.zip", "CloudMine-Testing", f"{RAW}/testing/pack.toml")]
 
 

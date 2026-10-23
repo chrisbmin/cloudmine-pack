@@ -26,7 +26,7 @@ Tests: `python -m unittest discover -s tools/tests -t .`
 
 ## Starter
 
-`python tools/build_starter.py` writes `dist/CloudMine-Starter.zip` and `dist/CloudMine-Testing.zip`.
+`python tools/build_starter.py` writes `dist/CloudMine-ModPack.zip` and `dist/CloudMine-Testing.zip`.
 `starter/packwiz-installer-bootstrap.jar` is
 [packwiz-installer-bootstrap](https://github.com/packwiz/packwiz-installer-bootstrap) v0.0.3 (MIT, license in
 `starter/LICENSE-packwiz-installer-bootstrap.txt`), sha256

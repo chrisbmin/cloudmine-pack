@@ -3,7 +3,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from tools.build_starter import build, render_cfg, servers_dat
+from tools.build_starter import STARTERS, build, render_cfg, servers_dat
 
 REPO = Path(__file__).resolve().parents[2]
 MAIN_URL = "https://raw.githubusercontent.com/chrisbmin/cloudmine-pack/main/pack.toml"
@@ -36,6 +36,9 @@ class StarterTests(unittest.TestCase):
             self.assertIn("iconKey=cloudmine", cfg)
             self.assertIn("name=CloudMine\n", cfg)
             self.assertIn(b"play.cloudmine.thecoldnorth.net", z.read("minecraft/servers.dat"))
+
+    def test_member_zip_is_named_modpack(self):
+        self.assertEqual([s[0] for s in STARTERS], ["CloudMine-ModPack.zip", "CloudMine-Testing.zip"])
 
     def test_starter_folder_is_packwizignored(self):
         lines = (REPO / ".packwizignore").read_text(encoding="utf-8").split()
